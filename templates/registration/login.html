@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} | 登录{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <ul class="messagelist"><li>登录失败，用户名或密码不正确！</li></ul>
+  {% endif %}
+
+  <form action="" method="post">
+    <label for="username">用户名:</label>
+    <input type="text" name="username" value="" id="username">
+    <label for="password">密码:</label>
+    <input type="password" name="password" value="" id="password">
+
+    <input type="submit" value="登录" />
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+  </form>
+
+{% endblock %}

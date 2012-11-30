@@ -1,4 +1,10 @@
-*.log
-*.pot
 *.pyc
-local_settings.py
+*.db
+*.swp
+*.exe
+*.txt
+*~
+*.temp
+*.DS_Store
+db/
+
