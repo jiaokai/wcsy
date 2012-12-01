@@ -48,7 +48,8 @@ USE_L10N = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 HERE = os.path.dirname(os.path.abspath(__file__))
-MEDIA_ROOT = os.path.join( HERE , 'media').replace('\\','/')
+# MEDIA_ROOT = os.path.join( HERE , 'media').replace('\\','/')
+MEDIA_ROOT = "/Users/jiaokai/Code/wcsy/media/"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -75,7 +76,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '~/Code/lwol/oa/static',
+    '/Users/jiaokai/Code/wcsy/web/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -99,8 +100,8 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -125,6 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'DjangoUeditor',
     'wcsy.web',
 )
 
@@ -150,6 +152,25 @@ LOGGING = {
         },
     }
 }
+
+# UEDITOR_SETTINGS={
+    # "images_upload":{
+        # "allow_type":"jpg,png",
+        # "path":"/Users/jiaokai/Code/wcsy/media/img/",
+        # "max_size":"2222kb"
+    # },
+    # "files_upload":{
+         # "allow_type":"zip,rar",
+         # "path":"/Users/jiaokai/Code/wcsy/media/uploads/",
+         # "max_size":"2222kb"
+     # },
+    # "image_manager":{
+         # "path":""
+    # },
+    # "scrawl_upload":{
+        # "path":""
+    # }
+# }
 
 SESSION_COOKIE_AGE = 43200
 LOGIN_URL='/login/'

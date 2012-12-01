@@ -11,7 +11,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             var msg = $("#messages");
-            var container_width = $(".wrapper").width()
+            var container_width = $(".admin-main").width()
             if(msg){
                 msg.css("left", (container_width-msg.width())/2+"px");
                 msg.fadeIn("slow");
@@ -26,27 +26,15 @@
     {% block blockbots %}<meta http-equiv="content-type" content="text/html; charset=utf-8" />{% endblock %}
 </head>
 <body>
-    <div class="header">
+    <div class="admin-header">
         <div class="header-top">
             <div id="logo"></div>
             <div class="top-nav">
-                <a href="/">HOME</a> |
-                <a href="/sitmap/">SITMAP</a> |
-                <a href="/shop/">SHOP</a>
+                <a href="/">返回首页</a>
             </div>
         </div>
-        <div class="header-main"></div>
-        <div class="header-nav">
-            <a href="/">网站首页</a>&nbsp;&nbsp; |&nbsp;&nbsp;
-            <a href="/news/">新闻中心</a>&nbsp;&nbsp; |&nbsp;&nbsp;
-            <a href="/products/">产品展示</a>&nbsp;&nbsp; |&nbsp;&nbsp;
-            <a href="/company/">公司简介</a>&nbsp;&nbsp; |&nbsp;&nbsp;
-            <a href="/news/">人事招聘</a>&nbsp;&nbsp; |&nbsp;&nbsp;
-            <a href="/search/">站内搜索</a>&nbsp;&nbsp; |&nbsp;&nbsp;
-            <a href="/contact/">联系我们</a>
-      </div>
     </div>
-    <div class="main">
+    <div class="admin-main">
         {% if messages %}
         <ul id="messages">
             {% for message in messages %}
@@ -54,24 +42,20 @@
             {% endfor %}
         </ul>
         {% endif %}
-        <div class="search">
-            <span style="font-size:14px;color:#68000E;font-weight:bold;">产品搜索：</span>
-            <input type="search" style="width:200px;">
-            <input type="submit" value="搜索">
+        <div class="admin-nav">
+            <ul>
+                <li><a href="/admin/">后台首页</a></li>
+                <li><a href="/admin/news/">新闻中心</a></li>
+                <li><a href="/admin/products/">产品展示</a></li>
+                <li><a href="/admin/company/">公司简介</a></li>
+                <li><a href="/admin/hire/">人事招聘</a></li>
+                <li><a href="/admin/contact/">联系我们</a></li>
+            </ul>
         </div>
-        {% block main %}
-        {% endblock %}
+        <div class="admin-content">
+            {% block main %}
+            {% endblock %}
+        </div>
         <div class="extra"></div>
-    </div>
-    <div id="footer">
-        <p>
-            <span style="float:left;">版权所有 © 2012 文昌书院, all rights reserved</span>
-            <span style="float:right;">
-                <a href="/help/">网站地图</a> |
-                <a href="/help/">招聘信息</a> |
-                <a href="/help/">意见建议</a> |
-                <a href="/help/">合作伙伴</a>
-            </span>
-        </p>
     </div>
 </body>

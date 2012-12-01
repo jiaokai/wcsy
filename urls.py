@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'wcsy.views.home', name='home'),
     # url(r'^wcsy/', include('wcsy.foo.urls')),
+    url(r'ueditor/', include('DjangoUeditor.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -20,6 +21,10 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     (r'^$', v_index),
+
+    (r'^admin/$', v_admin),
+    (r'^admin/news/$', v_admin_news),
+    (r'^admin/news/edit/$', v_admin_news_edit),
 
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'} ),

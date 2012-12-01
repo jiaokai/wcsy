@@ -22,6 +22,7 @@ form,
 ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, p, input, button, textarea, select {
 	margin:0;
 	padding:0;
+	list-style:none;
 }
 h1 { padding-bottom: 5px; }
 h2 { font: 14px Arial,Helvetica,sans-serif; color: #060; margin: 0 0 12px 0; line-height: 150%; }
@@ -125,7 +126,7 @@ input[type="radio"] {
 .header-top { height: 65px; }
 #logo {height: 65px;background:transparent url(../img/logo.png) no-repeat;float:left;width:500px; }
 .header-main { height: 312px; background:transparent url(../img/header-main.png) no-repeat; }
-.header-nav { padding-left:430px; padding-top:10px; height:26px; background:transparent url(../img/header-nav.png) no-repeat;  color: #FFFFFF;}
+.header-nav { padding-left:410px; padding-top:10px; height:26px; background:transparent url(../img/header-nav.png) no-repeat;  color: #FFFFFF;}
 .header-nav a { font-size: 12px; color: #FFFFFF;  }
 .header-top .top-nav { float:right; margin-top: 28px;}
 .main {margin: 10px auto; width:1000px;}
@@ -243,7 +244,6 @@ table { border-collapse: collapse; border: 0; padding: 0; margin: 0;
 #messages { position: absolute; left: 340px; top: 0px; z-index: 2; background-color: #eee; display: none; opacity: 0.9; }
 #messages:hover { opacity: 1; }
 #messages li {
-    list-style:none;
     padding: 5px 20px 5px 50px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2),0 0 1px rgba(0, 0, 0, 0.2);
     /* border-radius: 4px; */
@@ -390,9 +390,8 @@ a.img:hover { background:none; }
 p.title {background-color:#eee;padding-left:10px;font-size:14px;font-weight:bold;padding:4px 10px;}
 
 .admin-header { margin: 0 auto; width: 960px; }
-.admin-nav { padding: 20px 0; width: 200px; float:left; background-color: #ddd; }
-.admin-nav li {padding: 6px 20px; list-style:none;}
-.admin-nav li:hover {background: #bbb; }
+.admin-nav { padding: 20px; width: 160px; float:left; background-color: #ddd; }
+.admin-nav li {line-height:15px; }
 .admin-main { margin: 10px auto; width:960px; border-top: 2px solid #ddd; }
 .admin-content { float:right; width: 720px; padding: 20px; }
 #id_s_title { width:710px; }
