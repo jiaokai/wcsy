@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="content">
+    <div class="lside">
+        <h2>新闻中心</h2>
+        <div class="lside-w">
+            <ul class="menu">
+                <li class="bg"><a href="/news/?category=1" class="active" title="公司新闻">公司新闻</a></li>
+                <li><a href="/news/?category=2" title="行业动态">行业动态</a></li>
+                <li class="bg"><a href="/news/?category=3" title="政策法规">政策法规</a></li>
+                <li><a href="/news/?category=4" title="活动专题">活动专题</a></li>
+                <li class="bg"><a href="/news/?category=5" title="媒体报道">媒体报道</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="rside">
+        <div class="rside-title">
+            <h1>{{ t_news.s_title }}</h1>
+        </div>
+        <div class="news-info">
+            <p>发布时间：{{ t_news.d_postdate|date:"Y-m-d" }}</p>
+        </div>
+        <div class="news-content">
+            {{ t_news.s_content|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

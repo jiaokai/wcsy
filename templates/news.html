@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="content">
+    <div class="lside">
+        <h2>新闻中心</h2>
+        <div class="lside-w">
+            <ul class="menu">
+                <li class="bg"><a href="?category=1" class="active" title="公司新闻">公司新闻</a></li>
+                <li><a href="?category=2" title="行业动态">行业动态</a></li>
+                <li class="bg"><a href="?category=3" title="政策法规">政策法规</a></li>
+                <li><a href="?category=4" title="活动专题">活动专题</a></li>
+                <li class="bg"><a href="?category=5" title="媒体报道">媒体报道</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="rside">
+        <div class="rside-title">
+            <h1>{{ t_title }}</h1>
+        </div>
+        <div class="news-list">
+            <ul>
+                {% for i in news.object_list %}
+                <li class="bg">
+                    <div class="news-title" {% if i.s_face %}style="width:500px;"{% endif %}>
+                        <p class="time">[{{ i.d_postdate|date:"Y-m-d" }}]</p>
+                        <h4><a href="/news/content/?tid={{ i.id }}">{{ i.s_title }}</a></h4>
+                        <p>{{ i.s_sum|slice:"72" }}</p>
+                    </div>
+                    {% if i.s_face %}<a style="float:right;" href="/news/content/?tid={{ i.id }}"><img style="height:85px;width:169px;" {{ i.s_face|safe }} alt="“做中国最好的基础工程机械设备”"></a>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="pages">
+            {% if news.has_previous %}
+            <a class="previous" href="?page={{ news.previous_page_number }}">前一页</a>
+            {% endif %}
+
+            {% for i in page_range %}
+                {% if i == news.number %}
+                    <strong>{{ i }}</strong>
+                {% else %}
+                    {% if i == '...' %}
+                        <a href="javascript:void(0)">...</a>
+                    {% else %}
+                        <a href="?page={{ i }}">{{ i }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if news.has_next %}
+                <a class="next" href="?page={{ news.next_page_number }}">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

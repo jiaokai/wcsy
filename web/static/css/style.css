@@ -25,7 +25,7 @@ ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, p, input, button, textarea, select {
 }
 h1 { padding-bottom: 5px; }
 h2 { font: 14px Arial,Helvetica,sans-serif; color: #060; margin: 0 0 12px 0; line-height: 150%; }
-h4 { height: 26px; margin: 10px 0 10px 0px; padding-left:10px;font-weight:bold; overflow: hidden; font-size: 14px; color: #666; line-height: 1.8em; background: url(../img/topicbar.gif) no-repeat right top;}
+h4 { height: 26px; font-weight:bold; overflow: hidden; font-size: 14px; color: #666; line-height: 1.8em;}
 a { text-decoration:none; color:#3A76C6; outline:none; }
 
 /* a:hover { text-decoration:underline; color:#F63; } */
@@ -234,10 +234,8 @@ h3.title {
 .indent { word-break: break-all; }
 .s_content, .s_sum { word-break: break-all; font-size:14px;margin:10px;}
 
-table { border-collapse: collapse; border: 0; padding: 0; margin: 0;
-}
-.olt { width: 99%; padding: 0; margin: 0 5px 5px 5px; }
-.olt td { border-bottom: 1px dashed #DDD; padding: 3px 3px 3px 0; }
+.admin_rside { border-collapse: collapse;  margin: 10px 20px; }
+.admin_rside th, .admin_rside td { border: 2px solid #CCC; padding: 3px 10px; }
 
 /* Messages */
 #messages { position: absolute; left: 340px; top: 0px; z-index: 2; background-color: #eee; display: none; opacity: 0.9; }
@@ -395,4 +393,25 @@ p.title {background-color:#eee;padding-left:10px;font-size:14px;font-weight:bold
 .admin-nav li:hover {background: #bbb; }
 .admin-main { margin: 10px auto; width:960px; border-top: 2px solid #ddd; }
 .admin-content { float:right; width: 720px; padding: 20px; }
-#id_s_title { width:710px; }
+#id_s_title, #id_s_sum { width:710px; }
+
+.lside { float: left; width: 208px; height: auto; overflow: hidden;}
+.lside h2 {width: 100%; height: 40px; overflow: hidden; background: url(../img/side_tbg.gif) no-repeat 0 0; font-size: 18px; font-weight: normal; color: #FFF; line-height: 40px; font-family: 微软雅黑E\8F6F\96C5\9ED1; text-indent: 18px; margin-bottom:0px;}
+.lside-w { width: 100%; height: auto; overflow: hidden; padding-bottom: 215px; background: url(../img/side_bg2.gif) no-repeat 0 bottom; }
+.lside ul.menu { width: 100%; height: auto; overflow: hidden; }
+.lside ul.menu li { float: left; width: 100%; height: auto; overflow: hidden; border-top: 1px solid #d9d9d9; background: url(../img/side_bg0.gif) repeat-y 0 0; }
+.lside ul.menu li.bg { background: url(../img/side_bg1.gif) repeat-y 0 0; }
+.lside ul.menu li a { color:#626262; display: block; width: 100%; height: 30px; background: url(../img/arr1.gif) no-repeat 46px center; text-indent: 60px; line-height: 30px; }
+
+.rside {float: left; width: 760px; height: auto; overflow: hidden; margin-left: 32px;}
+.rside-title { width: 100%; height: 40px; overflow: hidden; background: url(../img/t_bg0.gif) no-repeat right center; border-bottom: 1px solid #DDD; }
+.rside-title h1 { float: left; font-size: 22px; line-height: 40px; color: #004ea2; font-family: 微软雅黑E\8F6F\96C5\9ED1; }
+.news-list { width: 100%; height: auto; overflow: hidden; margin: 10px 0 0 0; }
+.news-list ul li {  height: auto; overflow: hidden; padding: 30px 28px; }
+.news-list ul li.bg { background: #EEE; margin-bottom:10px;}
+.news-list ul li p.time { font-size: 10px; color: #888; }
+.news-list .news-title { display: inline-block; margin-left:20px; }
+.news-list ul li h4 { padding-bottom: 12px; }
+
+.news-info { margin:5px 0; color:#666;}
+.news-content { margin:10px 0; }

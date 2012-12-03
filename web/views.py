@@ -7,11 +7,63 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from wcsy.web.models import *
+import re
+
+# 通用函数 {{{1
+# 分页 {{{2
+def g_pages(records, per, page, ):
+    paginator = Paginator(records, per)
+
+    # try:
+        # page = int(request.GET.get('page', '1'))
+    # except:
+        # page = 1
+    after_range_num = 5        #当前页前显示5页
+    befor_range_num = 4       #当前页后显示4页
+    if page >= after_range_num:
+        page_range = paginator.page_range[page-after_range_num:page+befor_range_num]
+    else:
+        page_range = paginator.page_range[0:int(page)+befor_range_num]
+    if page_range[0] > 2:
+        page_range.insert(0, 1)
+        page_range.insert(1, '...')
+    if page_range[-1] < (paginator.page_range[-1] - 1):
+        page_range.append('...')
+        page_range.append(paginator.page_range[-1])
+
+    try:
+        records_result = paginator.page(page)
+    except:
+        records_result = paginator.page(paginator.num_pages) #}}}4
+
+    return records_result
 
 # 首页 {{{1
 def v_index(request):
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
+# 新闻 {{{1
+def v_news(request):
+    category = request.GET.get('category', '1')
+    t_title = m_news.CATEGORY[int(category)-1][1]
+    news = m_news.objects.filter(i_status__lte=5, i_category=int(category))
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    news = g_pages(news, 2, page)
+    return render_to_response('news.html', locals(), context_instance=RequestContext(request))
+
+def v_news_content(request):
+    tid = int(request.GET.get('tid', '0'))
+    if tid > 0:
+        try:
+            t_news = m_news.objects.get(pk=tid)
+        except:
+            return HttpResponseRedirect('/news/')
+    return render_to_response('news_content.html', locals(), context_instance=RequestContext(request))
 
 # 无权限 {{{1
 def v_no_permission(request):
@@ -20,13 +72,16 @@ def v_no_permission(request):
 # admins {{{1
 
 # admin {{{2
+@login_required
 def v_admin( request ):
     return render_to_response('admin.html', locals(), context_instance=RequestContext(request))
 # admin-news 列表页面 {{{2
+@login_required
 def v_admin_news( request ):
     news = m_news.objects.all()
     return render_to_response('admin_news.html', locals(), context_instance=RequestContext(request))
 # admin-news 编辑页面 {{{2
+@login_required
 def v_admin_news_edit( request ):
     tid = request.GET.get('tid', '')
     action = request.GET.get('action', '')
@@ -52,16 +107,75 @@ def v_admin_news_edit( request ):
         if f.is_valid():
             cd = f.cleaned_data
             if tid == '':
-                t_news = m_news(s_title=cd['s_title'], s_content=cd['s_content'], i_status=1, s_poster='dd')
+                face = re.findall(r'src=".*?"', cd['s_content'])
+                if face:
+                    face = face[0]
+                else:
+                    face = ""
+                t_news = m_news(s_title=cd['s_title'], s_sum=cd['s_sum'], s_content=cd['s_content'], i_status=1, s_poster='dd', s_face=face)
                 t_news.save()
                 return HttpResponseRedirect('/admin/news/')
             else:
                 t_news.s_title = cd['s_title']
+                t_news.s_sum = cd['s_sum']
                 t_news.s_content = cd['s_content']
+                face = re.findall(r'src=".*?"', cd['s_content'])
+                if face:
+                    t_news.s_face = face[0]
                 t_news.save()
                 return HttpResponseRedirect('/admin/news/')
 
     return render_to_response('admin_news_edit.html', locals(), context_instance=RequestContext(request))
+
+# admin 产品 {{{1
+@login_required
+def v_admin_product( request ):
+    news = m_news.objects.all()
+    return render_to_response('admin_product.html', locals(), context_instance=RequestContext(request))
+@login_required
+def v_admin_product_edit( request ):
+    f = f_product()
+    return render_to_response('admin_product_edit.html', locals(), context_instance=RequestContext(request))
+@login_required
+def v_admin_product_category( request ):
+    categorys = m_product_category.objects.all()
+    return render_to_response('admin_product_category.html', locals(), context_instance=RequestContext(request))
+
+@login_required
+def v_admin_product_category_edit( request ):
+    tid = request.GET.get('tid', '')
+    action = request.GET.get('action', '')
+    if tid != '':
+        try:
+            t_category = m_product_category.objects.get(pk=tid)
+        except:
+            messages.error(request, u"无此分类！")
+            return HttpResponseRedirect('/admin/product/category/')
+        else:
+            if action == 'delete':
+                t_category.delete()
+                messages.info(request, u"分类删除成功！")
+                return HttpResponseRedirect('/admin/product/category/')
+    if request.method == 'GET':
+        if tid == '':
+            f = f_product_category()
+        else:
+            f = f_product_category(initial={'s_cname':t_category.s_cname, 's_sum':t_category.s_sum})
+
+    elif request.method == 'POST':
+        f = f_product_category(request.POST)
+        if f.is_valid():
+            cd = f.cleaned_data
+            if tid == '':
+                t_category = m_product_category(s_cname=cd['s_cname'], s_sum=cd['s_sum'])
+                t_category.save()
+                return HttpResponseRedirect('/admin/product/category/')
+            else:
+                t_category.s_cname = cd['s_cname']
+                t_category.s_sum = cd['s_sum']
+                t_category.save()
+                return HttpResponseRedirect('/admin/product/category/')
+    return render_to_response('admin_product_category_edit.html', locals(), context_instance=RequestContext(request))
 
 # vim: foldmethod=marker
 # vim: foldcolumn=2

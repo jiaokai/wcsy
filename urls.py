@@ -21,10 +21,17 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     (r'^$', v_index),
+    (r'^news/$', v_news),
+    (r'^news/content/$', v_news_content),
 
     (r'^admin/$', v_admin),
     (r'^admin/news/$', v_admin_news),
     (r'^admin/news/edit/$', v_admin_news_edit),
+
+    (r'^admin/product/$', v_admin_product),
+    (r'^admin/product/edit/$', v_admin_product_edit),
+    (r'^admin/product/category/$', v_admin_product_category),
+    (r'^admin/product/category/edit/$', v_admin_product_category_edit),
 
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'} ),

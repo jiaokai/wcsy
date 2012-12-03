@@ -1,0 +1,25 @@
+{% extends "base_admin.html" %}
+
+{% block main %}
+
+<div>
+    <p style="float:right;"><a href="edit/">添加新分类</a>  </p>
+    <h1>产品中心 / 分类设置</h1>
+    <form action="" method="post" style="margin-top:20px;">{% csrf_token %}
+        <div>
+            {{ f.non_field_errors }}
+            {{ f.s_cname.errors }}
+            <p>分类名称：</p>
+            {{ f.s_cname }}
+        </div>
+
+        <div>
+            <p>分类简述：</p>
+            {{ f.s_sum.errors }}
+            {{ f.s_sum }}
+        </div>
+        <p><input type="submit" value="提交" /></p>
+    </form>
+</div>
+{% endblock %}
+

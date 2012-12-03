@@ -1,0 +1,24 @@
+{% extends "base_admin.html" %}
+
+{% block main %}
+
+<div>
+    <p style="float:right;"><a href="edit/">添加新分类</a>  </p>
+    <h1>产品中心 / 分类设置</h1>
+    <table class="admin_rside">
+        <tr>
+            <th>分类名称</th>
+            <th>简述</th>
+            <th>操作</th>
+        </tr>
+        {% for i in categorys %}
+        <tr>
+            <td>{{ i.s_cname }}</td>
+            <td>{{ i.s_sum }}</td>
+            <td><a href="/admin/product/category/?tid={{ i.id }}&action=edit">编辑</a> | <a href="/admin/product/category/?tid={{ i.id }}&action=delete">删除</a> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+

@@ -5,11 +5,20 @@
 {% endblock %}
 
 {% block main %}
-    <form action="" method="post">
+    <form action="" method="post">{% csrf_token %}
         <div>
             {{ f.non_field_errors }}
             {{ f.s_title.errors }}
             {{ f.s_title }}
+        </div>
+
+        <div>
+            {{ f.s_sum.errors }}
+            {{ f.s_sum }}
+        </div>
+        <div>
+            {{ f.i_category.errors }}
+            {{ f.i_category }}
         </div>
 
         <div>

@@ -2,9 +2,6 @@
 *.db
 *.swp
 *.exe
-*.txt
 *~
 *.temp
 *.DS_Store
-db/
-
