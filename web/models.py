@@ -37,13 +37,13 @@ class f_product_category(UEditorModelForm):
         exclude = ('i_count',)
 
 class m_product( models.Model ):
-    f_category = models.ForeignKey('m_product_category')
+    f_category = models.ForeignKey('m_product_category', verbose_name=u"分类")
     d_postdate = models.DateField(u"发布日期", auto_now_add=True)
     s_name = models.CharField(u"名称", max_length=100, default="名称")
     s_face = models.CharField(u"标题图片", max_length=100, blank=True)
     i_price = models.IntegerField(u"价格", max_length=10, default=0)
     s_intr = UEditorField(u"介绍",height=400,width=720,imagePath="img/",imageManagerPath="img/",toolbars='full',options={"elementPathEnabled":True},filePath='upload',blank=True, default=u"介绍")
-    s_link_buy = models.CharField(u"淘宝链接", max_length=500, blank=True)
+    s_link_buy = models.CharField(u"购买链接", max_length=500, blank=True)
     i_status = models.IntegerField(u"状态", max_length=2, default=1)
     s_poster = models.CharField(u"发布人", max_length=20)
 
@@ -53,7 +53,7 @@ class m_product( models.Model ):
 class f_product(UEditorModelForm):
     class Meta:
         model = m_product
-        exclude = ('s_face', 'i_status', )
+        exclude = ('s_face', 'i_status', 's_poster', )
 
 # vim: foldmethod=marker
 # vim: foldcolumn=2
