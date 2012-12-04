@@ -6,8 +6,8 @@
     <p style="float:right;"><a href="category/">分类设置</a> | <a href="edit/">发布产品</a> </p>
     <h1>产品中心</h1>
     <ul style="margin:20px 40px;">
-        {% for i in news %}
-            <li>[ {{ i.d_postdate|date:"Y-m-d" }} ] <a href="/news/?tid={{ i.id }}">{{ i.s_title }}</a> [ <a href="/admin/news/edit/?tid={{ i.id }}&action=edit">编辑</a> ] [ <a href="/admin/news/edit/?tid={{ i.id }}&action=delete">删除</a> ] </li>
+        {% for i in products.object_list %}
+            <li><a href="/product/?tid={{ i.id }}">{{ i.s_name }}</a> [ <a href="/admin/product/edit/?tid={{ i.id }}&action=edit">编辑</a> ] [ <a href="/admin/product/edit/?tid={{ i.id }}&action=delete">删除</a> ] </li>
         {% endfor %}
     </ul>
 </div>

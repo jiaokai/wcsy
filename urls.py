@@ -24,6 +24,9 @@ urlpatterns = patterns('',
     (r'^news/$', v_news),
     (r'^news/content/$', v_news_content),
 
+    (r'^product/$', v_product),
+    (r'^product/content/$', v_product_content),
+
     (r'^admin/$', v_admin),
     (r'^admin/news/$', v_admin_news),
     (r'^admin/news/edit/$', v_admin_news_edit),

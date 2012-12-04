@@ -64,6 +64,42 @@ def v_news_content(request):
         except:
             return HttpResponseRedirect('/news/')
     return render_to_response('news_content.html', locals(), context_instance=RequestContext(request))
+# 产品 {{{1
+def v_product(request):
+    categorys = m_product_category.objects.all()
+    try:
+        category = int(request.GET.get('category', '0'))
+    except:
+        category = 0
+    if category == 0:
+        t_title = u"全部产品"
+        products = m_product.objects.all()
+    else:
+        try:
+            t_category = m_product_category.objects.get(pk=category)
+        except:
+            return HttpResponseRedirect('/product/')
+        else:
+            t_title = t_category.s_cname
+            products = m_product.objects.filter(f_category=t_category)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    products = g_pages(products, 2, page)
+    return render_to_response('product.html', locals(), context_instance=RequestContext(request))
+
+def v_product_content(request):
+    categorys = m_product_category.objects.all()
+    tid = int(request.GET.get('tid', '0'))
+    if tid > 0:
+        try:
+            t_product = m_product.objects.get(pk=tid)
+        except:
+            return HttpResponseRedirect('/product/')
+    return render_to_response('product_content.html', locals(), context_instance=RequestContext(request))
 
 # 无权限 {{{1
 def v_no_permission(request):
@@ -130,12 +166,75 @@ def v_admin_news_edit( request ):
 # admin 产品 {{{1
 @login_required
 def v_admin_product( request ):
-    news = m_news.objects.all()
+    products = m_product.objects.all()
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+    products = g_pages(products, 10, page)
     return render_to_response('admin_product.html', locals(), context_instance=RequestContext(request))
 @login_required
 def v_admin_product_edit( request ):
-    f = f_product()
+    tid = request.GET.get('tid', '')
+    action = request.GET.get('action', '')
+    if tid != '':
+        try:
+            t_product = m_product.objects.get(pk=tid)
+        except:
+            messages.error(request, u"无此产品！")
+            return HttpResponseRedirect('/admin/product/')
+        else:
+            if action == 'delete':
+                t_product.delete()
+                messages.info(request, u"产品删除成功！")
+                return HttpResponseRedirect('/admin/product/')
+    if request.method == 'GET':
+        if tid == '':
+            f = f_product()
+        else:
+            f = f_product(initial={'f_category':t_product.f_category, \
+                                   # 'd_postdate': t_product.d_postdate, \
+                                   's_name':t_product.s_name, \
+                                   'i_price':t_product.i_price, \
+                                   's_intr': t_product.s_intr, \
+                                   's_link_buy': t_product.s_link_buy })
+
+    elif request.method == 'POST':
+        f = f_product(request.POST)
+        if f.is_valid():
+            cd = f.cleaned_data
+            if tid == '':
+                face = re.findall(r'src=".*?"', cd['s_intr'])
+                if face:
+                    face = face[0]
+                else:
+                    face = ""
+                t_product = m_product(f_category=cd['f_category'], \
+                                      s_name=cd['s_name'], \
+                                      i_price=cd['i_price'], \
+                                      s_intr=cd['s_intr'], \
+                                      s_face=face, \
+                                      s_link_buy=cd['s_link_buy'], \
+                                      i_status=1, \
+                                      s_poster=request.user.username )
+                t_product.save()
+                return HttpResponseRedirect('/admin/product/')
+            else:
+                t_product.f_category = cd['f_category']
+                t_product.s_name = cd['s_name']
+                t_product.i_price = cd['i_price']
+                t_product.s_intr = cd['s_intr']
+                t_product.s_link_buy = cd['s_link_buy']
+                t_product.s_poster = request.user.username
+
+                face = re.findall(r'src=".*?"', cd['s_intr'])
+                if face:
+                    t_product.s_face = face[0]
+                t_product.save()
+                return HttpResponseRedirect('/admin/product/')
+
     return render_to_response('admin_product_edit.html', locals(), context_instance=RequestContext(request))
+
 @login_required
 def v_admin_product_category( request ):
     categorys = m_product_category.objects.all()

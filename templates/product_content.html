@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="content">
+    <div class="lside">
+        <h2>产品展示</h2>
+        <div class="lside-w">
+            <ul class="menu">
+                {% for i in categorys %}
+                    <li class="{% cycle 'bg' 'bg2' %}"><a href="/product/?category={{ i.id }}" title={{ i.s_cname }}>{{ i.s_cname }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="rside">
+        <div class="rside-title">
+            <h1>{{ t_product.s_name }}</h1>
+        </div>
+        <div class="g-info">
+            <p>发布时间：{{ t_product.d_postdate|date:"Y-m-d" }}</p>
+            <p>价格：￥ {{ t_product.i_price }}</p>
+            <p>购买链接：{{ t_product.s_link_buy }}</p>
+        </div>
+
+        <div class="g-content">
+            {{ t_product.s_intr|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

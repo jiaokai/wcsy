@@ -111,7 +111,7 @@ input[type="radio"] {
 
 #container {
     position: relative;
-    width: 1000px;
+    width: 960px;
     max-width: 1080px;
     min-width: 960px;
     padding: 0;
@@ -121,45 +121,21 @@ input[type="radio"] {
     box-shadow: rgba( 0, 0, 1, 0.9 ) 0px 1px 6px;
 }
 /*头部*/
-.header { margin: 0 auto; width: 1000px; }
+.header { margin: 0 auto; width: 960px; }
 .header-top { height: 65px; }
 #logo {height: 65px;background:transparent url(../img/logo.png) no-repeat;float:left;width:500px; }
 .header-main { height: 312px; background:transparent url(../img/header-main.png) no-repeat; }
 .header-nav { padding-left:430px; padding-top:10px; height:26px; background:transparent url(../img/header-nav.png) no-repeat;  color: #FFFFFF;}
 .header-nav a { font-size: 12px; color: #FFFFFF;  }
 .header-top .top-nav { float:right; margin-top: 28px;}
-.main {margin: 10px auto; width:1000px;}
+.main {margin: 10px auto; width:960px;}
 .main .search { width: 400px; float:left; margin-top:-36px;}
 /*LOGO*/
 
-.title-news {
-    background: transparent url(../img/title-news.png) no-repeat; 
-    float:left;
-    height: 198px;
-    width:460px;
-    margin-right:20px;
-}
-.title-products {
-    background: transparent url(../img/title-products.png) no-repeat; 
-    float:left;
-    height: 198px;
-    width:480px;
-    margin-left:20px;
-}
-.title-company {
-    background: transparent url(../img/title-company.png) no-repeat; 
-    float:left;
-    height: 150px;
-    width:460px;
-    margin-right:20px;
-}
-.title-contact {
-    background: transparent url(../img/title-contact.png) no-repeat; 
-    float:left;
-    height: 150px;
-    width:480px;
-    margin-left:20px;
-}
+.title-news { background: transparent url(../img/title-news.png) no-repeat; float:left; height: 198px; width:460px; margin-right:20px; }
+.title-products { background: transparent url(../img/title-products.png) no-repeat; float:left; height: 198px; width:460px; margin-left:20px; }
+.title-company { background: transparent url(../img/title-company.png) no-repeat; float:left; height: 150px; width:460px; margin-right:20px; }
+.title-contact { background: transparent url(../img/title-contact.png) no-repeat; float:left; height: 150px; width:460px; margin-left:20px; }
 .title-content {
     padding: 38px 0 0 24px;
     height:160px;
@@ -376,7 +352,7 @@ span.mail { background: url(../img/mail.png) no-repeat right top; width:20px; he
 .contact p { padding: 0 20px; }
 
 
-#footer { border-top: 1px solid #ccc; width:1000px; color: #999; margin:10px auto;; overflow: hidden; zoom: 1; padding:10px 0 0 20px; }
+#footer { border-top: 1px solid #ccc; width:960px; color: #999; margin:10px auto;; overflow: hidden; zoom: 1; padding:10px 0 20px 0; }
 #footer a {color:#ACB5C5; }
 
 span.istrong { color:#DD4B39; text-decoration:blink;font-weight:bold;}
@@ -393,7 +369,6 @@ p.title {background-color:#eee;padding-left:10px;font-size:14px;font-weight:bold
 .admin-nav li:hover {background: #bbb; }
 .admin-main { margin: 10px auto; width:960px; border-top: 2px solid #ddd; }
 .admin-content { float:right; width: 720px; padding: 20px; }
-#id_s_title, #id_s_sum { width:710px; }
 
 .lside { float: left; width: 208px; height: auto; overflow: hidden;}
 .lside h2 {width: 100%; height: 40px; overflow: hidden; background: url(../img/side_tbg.gif) no-repeat 0 0; font-size: 18px; font-weight: normal; color: #FFF; line-height: 40px; font-family: 微软雅黑E\8F6F\96C5\9ED1; text-indent: 18px; margin-bottom:0px;}
@@ -403,7 +378,7 @@ p.title {background-color:#eee;padding-left:10px;font-size:14px;font-weight:bold
 .lside ul.menu li.bg { background: url(../img/side_bg1.gif) repeat-y 0 0; }
 .lside ul.menu li a { color:#626262; display: block; width: 100%; height: 30px; background: url(../img/arr1.gif) no-repeat 46px center; text-indent: 60px; line-height: 30px; }
 
-.rside {float: left; width: 760px; height: auto; overflow: hidden; margin-left: 32px;}
+.rside {float: left; width: 720px; height: auto; overflow: hidden; margin-left: 32px;}
 .rside-title { width: 100%; height: 40px; overflow: hidden; background: url(../img/t_bg0.gif) no-repeat right center; border-bottom: 1px solid #DDD; }
 .rside-title h1 { float: left; font-size: 22px; line-height: 40px; color: #004ea2; font-family: 微软雅黑E\8F6F\96C5\9ED1; }
 .news-list { width: 100%; height: auto; overflow: hidden; margin: 10px 0 0 0; }
@@ -413,5 +388,14 @@ p.title {background-color:#eee;padding-left:10px;font-size:14px;font-weight:bold
 .news-list .news-title { display: inline-block; margin-left:20px; }
 .news-list ul li h4 { padding-bottom: 12px; }
 
-.news-info { margin:5px 0; color:#666;}
-.news-content { margin:10px 0; }
+.g-info { margin:5px 0; color:#666;}
+.g-content { margin:10px 0; }
+
+.rside-products { margin:20px 0 0 16px; }
+/* .product {border: 1px solid #ccc; width:168px;height:200px;margin:20px 10px 0px 10px;float:left;} */
+.product {position: relative; display: inline; float: left; width: 220px; background: url(../img/medium-frame.png) no-repeat; height: 240px; margin: 0 13px 13px 0;}
+.product h6 { z-index: 2; display: inline; position: relative; font-family: arial,sans-serif; font-size: 11px; color: #666; font-weight: normal; padding: 3px 4px; line-height: 0!important; top: -2px; left: 8px; overflow: hidden; margin: 0; background: white;}
+.product .product-title { margin-top: -20px; background-color:#ccc; color:white; }
+
+#id_s_link_buy, #id_s_name, #id_s_title, #id_s_sum { width:710px; }
+.content img { max-width: 100%; overflow:hidden;}

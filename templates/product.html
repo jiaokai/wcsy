@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="content">
+    <div class="lside">
+        <h2>产品展示</h2>
+        <div class="lside-w">
+            <ul class="menu">
+                {% for i in categorys %}
+                    <li class="{% cycle 'bg' 'bg2' %}"><a href="?category={{ i.id }}" title={{ i.s_cname }}>{{ i.s_cname }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="rside">
+        <div class="rside-title">
+            <h1>{{ t_title }}</h1>
+        </div>
+        <div class="rside-products">
+            {% for i in products.object_list %}
+                <div class="product">
+                    <div>
+                        <a href="/product/content/?tid={{ i.id }}">
+                            <img {{ i.s_face|safe }} style="width:196px; height:185px;padding:12px;">
+                            <h6>{{ i.s_name }}</h6>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="product"> </div>
+            <div class="product"> </div>
+            <div class="product"> </div>
+            <div class="product"> </div>
+        </div>
+        <div class="pages">
+            {% if news.has_previous %}
+            <a class="previous" href="?page={{ news.previous_page_number }}">前一页</a>
+            {% endif %}
+
+            {% for i in page_range %}
+                {% if i == news.number %}
+                    <strong>{{ i }}</strong>
+                {% else %}
+                    {% if i == '...' %}
+                        <a href="javascript:void(0)">...</a>
+                    {% else %}
+                        <a href="?page={{ i }}">{{ i }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if news.has_next %}
+                <a class="next" href="?page={{ news.next_page_number }}">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

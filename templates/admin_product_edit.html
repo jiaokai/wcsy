@@ -9,26 +9,29 @@
 <h1>产品中心 / {% if tid %}产品信息修改{% else %}产品发布{% endif %}</h1>
 <div style="margin:10px 0;border-top: 2px dashed #ccc; padding-top:10px;">
     <form action="" method="post">{% csrf_token %}
-        <!-- <div> -->
-            <!-- {{ f.non_field_errors }} -->
-            <!-- {{ f.s_title.errors }} -->
-            <!-- {{ f.s_title }} -->
-        <!-- </div> -->
+        <div>
+            {{ f.non_field_errors }}
+            {{ f.s_name.errors }}
+            {{ f.s_name }}
+        </div>
 
-        <!-- <div> -->
-            <!-- {{ f.s_sum.errors }} -->
-            <!-- {{ f.s_sum }} -->
-        <!-- </div> -->
-        <!-- <div> -->
-            <!-- {{ f.i_category.errors }} -->
-            <!-- {{ f.i_category }} -->
-        <!-- </div> -->
+        <div>
+            {{ f.s_intr.errors }}
+            {{ f.s_intr }}
+        </div>
+        <div>
+            {{ f.s_link_buy.errors }}
+            <label>购买链接：</label>{{ f.s_link_buy }}
+        </div>
+        <div>
+            {{ f.f_category.errors }}
+            <label>分类：</label>{{ f.f_category }}
+        </div>
+        <div>
+            {{ f.i_price.errors }}
+            <label>价格：</label>{{ f.i_price }}
+        </div>
 
-        <!-- <div> -->
-            <!-- {{ f.s_content.errors }} -->
-            <!-- {{ f.s_content }} -->
-        <!-- </div> -->
-    {{ f.as_p }}
         <p><input type="submit" value="提交" /></p>
     </form>
 </div>
