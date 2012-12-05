@@ -55,5 +55,17 @@ class f_product(UEditorModelForm):
         model = m_product
         exclude = ('s_face', 'i_status', 's_poster', )
 
+# company {{{1
+class m_options(models.Model):
+    s_name = models.CharField(u"参数", max_length=20)
+    s_content = UEditorField(u"介绍",height=400,width=720,imagePath="img/",imageManagerPath="img/",toolbars='full',options={"elementPathEnabled":True},filePath='upload',blank=True, default=u"介绍")
+    i_status = models.IntegerField(u"状态", max_length=2, default=1)
+
+class f_options(UEditorModelForm):
+    class Meta:
+        model = m_options
+        exclude = ('s_name', 'i_status',)
+
+
 # vim: foldmethod=marker
 # vim: foldcolumn=2

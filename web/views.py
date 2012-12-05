@@ -91,6 +91,28 @@ def v_product(request):
     products = g_pages(products, 2, page)
     return render_to_response('product.html', locals(), context_instance=RequestContext(request))
 
+# 公司简介 {{{1
+def v_company(request):
+    try:
+        company = m_options.objects.get(s_name="company")
+    except:
+        pass
+    return render_to_response('company.html', locals(), context_instance=RequestContext(request))
+# 人事招聘 {{{1
+def v_hire(request):
+    try:
+        hire = m_options.objects.get(s_name="hire")
+    except:
+        pass
+    return render_to_response('hire.html', locals(), context_instance=RequestContext(request))
+# 联系我们 {{{1
+def v_contact(request):
+    try:
+        contact = m_options.objects.get(s_name="contact")
+    except:
+        pass
+    return render_to_response('contact.html', locals(), context_instance=RequestContext(request))
+
 def v_product_content(request):
     categorys = m_product_category.objects.all()
     tid = int(request.GET.get('tid', '0'))
@@ -106,7 +128,6 @@ def v_no_permission(request):
     return render_to_response('no_permission.html', locals(), context_instance=RequestContext(request))
 
 # admins {{{1
-
 # admin {{{2
 @login_required
 def v_admin( request ):
@@ -163,7 +184,7 @@ def v_admin_news_edit( request ):
 
     return render_to_response('admin_news_edit.html', locals(), context_instance=RequestContext(request))
 
-# admin 产品 {{{1
+# admin 产品 {{{2
 @login_required
 def v_admin_product( request ):
     products = m_product.objects.all()
@@ -275,6 +296,52 @@ def v_admin_product_category_edit( request ):
                 t_category.save()
                 return HttpResponseRedirect('/admin/product/category/')
     return render_to_response('admin_product_category_edit.html', locals(), context_instance=RequestContext(request))
+
+# admin 公司简介 {{{2
+@login_required
+def v_admin_company( request ):
+    try:
+        company = m_options.objects.get(s_name=u"company")
+    except:
+        if request.method == "GET":
+            f = f_options()
+        elif request.method == "POST":
+            f = f_options(request.POST)
+            if f.is_valid():
+                cd = f.cleaned_data
+                m_options(s_name=u"company", s_content=cd['s_content'], i_status=1).save()
+    else:
+        if request.method == "GET":
+            f = f_options(initial={'s_name':company.s_name, 's_content': company.s_content})
+        elif request.method == "POST":
+            f = f_options(request.POST)
+            if f.is_valid():
+                cd = f.cleaned_data
+                company.s_content = cd['s_content']
+                company.save()
+    return render_to_response('admin_company.html', locals(), context_instance=RequestContext(request))
+
+# admin 人事招聘 {{{2
+@login_required
+def v_admin_hire( request ):
+    try:
+        hire = m_options.objects.get(s_name="hire")
+    except:
+        f = f_options()
+    else:
+        f = f_options(initial={'s_name':hire.s_name, 's_content': hire.s_content})
+    return render_to_response('admin_hire.html', locals(), context_instance=RequestContext(request))
+
+# admin 联系我们 {{{2
+@login_required
+def v_admin_contact( request ):
+    try:
+        contact = m_options.objects.get(s_name="contact")
+    except:
+        f = f_options()
+    else:
+        f = f_options(initial={'s_name':contact.s_name, 's_content': contact.s_content})
+    return render_to_response('admin_contact.html', locals(), context_instance=RequestContext(request))
 
 # vim: foldmethod=marker
 # vim: foldcolumn=2

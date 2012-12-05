@@ -1,0 +1,20 @@
+{% extends "base_admin.html" %}
+
+{% block hd-extra %}
+    {{ f.media }}
+{% endblock %}
+
+{% block main %}
+    <form action="" method="post">{% csrf_token %}
+        <div>
+            {{ f.non_field_errors }}
+        </div>
+
+        <div>
+            {{ f.s_content.errors }}
+            {{ f.s_content }}
+        </div>
+        <p><input type="submit" value="提交" /></p>
+    </form>
+{% endblock %}
+
