@@ -40,6 +40,9 @@ def g_pages(records, per, page, ):
 
 # 首页 {{{1
 def v_index(request):
+    images = m_product.objects.all()[:4]
+    for i in images:
+        i.s_face = i.s_face[5:-1]
     return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
 # 新闻 {{{1
